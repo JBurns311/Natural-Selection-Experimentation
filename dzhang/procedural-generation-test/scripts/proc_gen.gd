@@ -5,12 +5,16 @@ class_name ProcGenerator
 const TILE_DATA: Dictionary = {
 	"floor": {
 		"source_id": 0,
-		"atlas_coords": Vector2i(2,2),
+		"atlas_coords": Vector2(1,0),
 	},
 	"wall": {
 		"source_id": 0,
-		"atlas_coords": Vector2i(0,2),
+		"atlas_coords": Vector2(0,1),
 	},
+	"wall_top": {
+		"source_id": 0,
+		"atlas_coords": Vector2(0,0)
+	}
 }
 
 @export var gen_seed: int = 0
@@ -33,6 +37,7 @@ func generate_map() -> void:
 	tilemap_layer.clear()
 	draw_tile_rect(map_dimensions, TILE_DATA.wall.source_id, TILE_DATA.wall.atlas_coords)
 	draw_proc_generation(map_dimensions, boundary_padding, TILE_DATA.floor.source_id, TILE_DATA.floor.atlas_coords)
+	draw_walls()
 
 func draw_tile_rect(dimensions: Vector2i, source_id: int, atlas_coords: Vector2i) -> void:
 	for x in range(dimensions.x):
@@ -64,7 +69,4 @@ func draw_proc_generation(dimensions: Vector2i, padding: int, source_id: int, at
 				if bounds.has_point(cur_pos + d):
 					cur_pos += d
 					break
-		
-# add a way to generate top and bottom boundary tiles to make it more immersive
-# scan each floor tile and generate boundary tiles when a floor tile is above/below a wall tile?
-# or just look at the neighbors for each floor tile and generate that way
+			
