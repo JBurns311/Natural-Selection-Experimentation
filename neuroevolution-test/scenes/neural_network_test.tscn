@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbfps87bbw4d8"]
+
+[ext_resource type="Script" uid="uid://cpc0stnc1ljhn" path="res://neural_network_test.gd" id="1_ywm1n"]
+
+[node name="NeuralNetworkTest" type="Node" unique_id=2033819654]
+script = ExtResource("1_ywm1n")
