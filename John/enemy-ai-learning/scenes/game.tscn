@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa2ljy47w55y" path="res://scenes/slime.tscn" id="7_u5sy4"]
 [ext_resource type="FontFile" uid="uid://ohy6ik5becyx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://d2k5n5f6tdabl" path="res://scenes/smart_slime.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://bq8kaaox1mbf3" path="res://scenes/health_bar.tscn" id="11_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -208,6 +209,15 @@ texture = ExtResource("4_lbhrr")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_iywne")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1th4"]
+bg_color = Color(4.1512772e-07, 0.253885, 0.12914476, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1wlx"]
+bg_color = Color(0.77892405, 0.3959136, 0.9782545, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o38hi"]
+radius = 11.0
+
 [sub_resource type="Animation" id="Animation_lbhrr"]
 length = 0.001
 tracks/0/type = "value"
@@ -249,6 +259,24 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d6yxf"]
 distance = -190.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trtic"]
+bg_color = Color(0, 0.25490198, 0.3254902, 0.9490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+bg_color = Color(0.8980392, 0.023529412, 0.28627452, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4yl1b"]
+radius = 11.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(9.62615e-08, 0.2567912, 0.3267639, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+bg_color = Color(0.8980392, 0.023529412, 0.28627452, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18csn"]
+radius = 11.0
+
 [node name="Game" type="Node2D" unique_id=117406636]
 
 [node name="GameManager" type="Node" parent="." unique_id=822449324]
@@ -287,6 +315,26 @@ limit_right = 592
 limit_bottom = 80
 position_smoothing_enabled = true
 
+[node name="ProgressBar" parent="Player" unique_id=1071290514 instance=ExtResource("11_dinhu")]
+offset_left = 10.0
+offset_top = -23.0
+offset_right = 13.009041
+offset_bottom = -5.314987
+rotation = 1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_u1th4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e1wlx")
+max_value = 1.0
+fill_mode = 3
+
+[node name="player_hitbox" type="Area2D" parent="Player" unique_id=2104256053]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/player_hitbox" unique_id=1090729762]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_o38hi")
+
+[node name="damage_cooldown" type="Timer" parent="Player" unique_id=666993180]
+wait_time = 0.5
+
 [node name="MovingPlatform" parent="." unique_id=444411415 instance=ExtResource("3_lnu2h")]
 position = Vector2(400, 4)
 
@@ -312,14 +360,52 @@ position = Vector2(472, -40)
 [node name="Slime" parent="Enemies" unique_id=19035361 instance=ExtResource("7_u5sy4")]
 position = Vector2(-120, 20)
 
+[node name="ProgressBar" parent="Enemies/Slime" unique_id=1801944903 instance=ExtResource("11_dinhu")]
+offset_left = 9.0
+offset_top = -8.0
+offset_right = 11.423595
+offset_bottom = 8.235489
+rotation = 1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_trtic")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ir15t")
+fill_mode = 3
+
+[node name="slime_hitbox" type="Area2D" parent="Enemies/Slime" unique_id=1879288670]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Slime/slime_hitbox" unique_id=637320002]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_4yl1b")
+
+[node name="damage_cooldown" type="Timer" parent="Enemies/Slime" unique_id=1586942363]
+
+[node name="SmartSlime" parent="Enemies" unique_id=2139754656 instance=ExtResource("10_vtaks")]
+position = Vector2(304, 58)
+
+[node name="ProgressBar" parent="Enemies/SmartSlime" unique_id=1913197938 instance=ExtResource("11_dinhu")]
+offset_left = 7.0
+offset_top = -14.0
+offset_right = 11.0
+offset_bottom = 1.2203064
+rotation = 1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dinhu")
+fill_mode = 3
+
+[node name="smart_slime_hitbox" type="Area2D" parent="Enemies/SmartSlime" unique_id=343615017]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/SmartSlime/smart_slime_hitbox" unique_id=1572731310]
+shape = SubResource("CircleShape2D_18csn")
+
+[node name="damage_cooldown" type="Timer" parent="Enemies/SmartSlime" unique_id=711859716]
+
 [node name="Labels" type="Node" parent="." unique_id=1391458871]
 
 [node name="Label" type="Label" parent="Labels" unique_id=1711543403]
 z_index = -1
-offset_left = -129.0
-offset_top = -67.0
-offset_right = -8.0
-offset_bottom = -19.0
+offset_left = -132.0
+offset_top = -101.0
+offset_right = -11.0
+offset_bottom = -53.0
 theme_override_fonts/font = ExtResource("8_gee14")
 theme_override_font_sizes/font_size = 8
 text = "Welcome!
@@ -328,5 +414,9 @@ D - Move Right
 W/Space - Jump"
 horizontal_alignment = 1
 
-[node name="SmartSlime" parent="." unique_id=2139754656 instance=ExtResource("10_vtaks")]
-position = Vector2(304, 58)
+[node name="health_bar" parent="." unique_id=1124711559 instance=ExtResource("11_dinhu")]
+visible = false
+
+[connection signal="body_entered" from="Player/player_hitbox" to="Player" method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="Player/player_hitbox" to="Player" method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="Player/damage_cooldown" to="Player" method="_on_damge_cooldown_timeout"]

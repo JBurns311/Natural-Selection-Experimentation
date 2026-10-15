@@ -1,11 +1,15 @@
 extends CharacterBody2D
 
-
 const SPEED = 50.0
 const JUMP_VELOCITY = -250.0
 var is_chasing = false
 var player = null
 var time_since_jump = 0.0
+
+var health = 100.0
+var damage_cooldown_active = false
+
+@onready var health_bar: ProgressBar = $ProgressBar
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -48,3 +52,15 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 func _on_attack_area_body_exited(_body: Node2D) -> void:
 	player = null
 	is_chasing = false
+
+func take_player_attack():
+	health_bar.subtract_portion(0.1)
+	damage_cooldown_active = true
+	$damage_cooldown.start()
+
+func _on_damage_cooldown_timeout():
+	damage_cooldown_active = false
+
+# Marks this as a script for an enemy
+func enemy():
+	pass
