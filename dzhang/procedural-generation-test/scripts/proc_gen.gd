@@ -43,7 +43,7 @@ func draw_tile_rect(dimensions: Vector2i, source_id: int, atlas_coords: Vector2i
 
 
 func draw_proc_generation(dimensions: Vector2i, padding: int, source_id: int, atlas_coords: Vector2i) -> void:
-	var directions: Array = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
+	var directions: Array[Vector2i] = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 	var cur_pos: Vector2i = Vector2i(floor(dimensions.x / 2.0), floor(dimensions.y / 2.0))
 	var bounds: Rect2i = Rect2i(0, 0, dimensions.x, dimensions.y)
 	
