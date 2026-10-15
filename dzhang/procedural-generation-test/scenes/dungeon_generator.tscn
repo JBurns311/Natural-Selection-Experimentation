@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dwmpxt6meh4fs"]
+
+[ext_resource type="Script" uid="uid://ckmpgu20i20o4" path="res://scripts/dungeon_generator.gd" id="1_08e2k"]
+
+[node name="DungeonGenerator" type="Node2D" unique_id=1635125496]
+script = ExtResource("1_08e2k")
+gen_seed = 3586253593
+dungeon_room_dimensions = Vector2i(5, 5)
+room_pos_start = Vector2i(1, 1)
