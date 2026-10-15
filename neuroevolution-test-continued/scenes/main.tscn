@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dcubq107f1n6d"]
+
+[ext_resource type="Script" uid="uid://dgl02507xepgv" path="res://scenes/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Node2D" unique_id=45208470]
+script = ExtResource("1_o5qli")
+
+[node name="Target" type="ColorRect" parent="." unique_id=1121652474]
+offset_left = 700.0
+offset_top = 400.0
+offset_right = 760.0
+offset_bottom = 460.0
+color = Color(0.422893, 0.7258593, 0.17858842, 1)
